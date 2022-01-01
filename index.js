@@ -24,7 +24,7 @@ async function run() {
   try {
     await client.connect();
     // console.log('Successfully Connected');
-    const database = client.db("drones");
+    const database = client.db("jewelries");
     const productCollection = database.collection("products");
     const orderCollection = database.collection("allorders");
     const reviewCollection = database.collection("reviews");
@@ -243,7 +243,7 @@ run().catch(console.dir);
 
 //Test The Server Connection
 app.get("/", (req, res) => {
-  res.send("Running Drone Server.");
+  res.send("Running Jewelries Server.");
 });
 
 app.listen(port, () => {
