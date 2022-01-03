@@ -1,4 +1,4 @@
-const express = require("express"); 
+const express = require("express");
 const { MongoClient } = require("mongodb");
 const cors = require("cors");
 const ObjectId = require("mongodb").ObjectId;
@@ -30,7 +30,7 @@ async function run() {
     const reviewCollection = database.collection("reviews");
     const userCollection = database.collection("users");
 
-/*-------------------------------------------------------------------------------*\
+    /*-------------------------------------------------------------------------------*\
   //////////////////////////////// All Products \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 \*-------------------------------------------------------------------------------*/
 
@@ -192,13 +192,27 @@ async function run() {
       res.json(result);
     });
 
-    //Make Admin
-    app.put("/users/admin", async (req, res) => {
+    // //Make Admin
+    // app.put("/users/admin", async (req, res) => {
+    //   const user = req.body;
+    //   console.log("put", user);
+    //   const filter = { email: user.email };
+    //   const updateDoc = { $set: { role: "admin" } };
+    //   const result = await userCollection.updateOne(filter, updateDoc);
+    //   res.json(result);
+    // });
+
+    //Arif
+    app.put("/users", async (req, res) => {
       const user = req.body;
-      console.log("put", user);
       const filter = { email: user.email };
-      const updateDoc = { $set: { role: "admin" } };
-      const result = await userCollection.updateOne(filter, updateDoc);
+      const options = { upsert: true };
+      const updateDoc = { $set: user };
+      const result = await usersCollection.updateOne(
+        filter,
+        updateDoc,
+        options
+      );
       res.json(result);
     });
 
