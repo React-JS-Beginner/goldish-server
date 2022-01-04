@@ -195,8 +195,7 @@ async function run() {
       const email = req.params.email;
       // console.log(email);
       const filter = { email: email };
-      const cursor = userCollection.find(filter);
-      const user = await cursor.toArray();
+      const user = await userCollection.findOne(filter);
       res.json(user);
     });
 
