@@ -140,7 +140,7 @@ async function run() {
   //////////////////////////////// My Orders \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 \*-------------------------------------------------------------------------------*/
 
-    //Get My Orders by email
+    /* //Get My Orders by email
     app.get("/myorders", async (req, res) => {
       let query = {};
       const email = req.query.email;
@@ -148,6 +148,15 @@ async function run() {
         query = { userEmail: email };
       }
       const cursor = orderCollection.find(query);
+      const orders = await cursor.toArray();
+      res.json(orders);
+    }); */
+
+    app.get("/myorders/:email", async (req, res) => {
+      const email = req.params.email;
+      // console.log(email);
+      const filter = { email: email };
+      const cursor = orderCollection.find(filter);
       const orders = await cursor.toArray();
       res.json(orders);
     });
@@ -200,7 +209,7 @@ async function run() {
       const updateDoc = { $set: { role: "admin" } };
       const result = await userCollection.updateOne(filter, updateDoc);
       res.json(result);
-    });    
+    });
 
     //Admin Verfication
     app.get("/users/:email", async (req, res) => {
