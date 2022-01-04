@@ -191,6 +191,15 @@ async function run() {
       res.json(users);
     });
 
+    app.get("/user/:email", async (req, res) => {
+      const email = req.params.email;
+      // console.log(email);
+      const filter = { email: email };
+      const cursor = userCollection.find(filter);
+      const user = await cursor.toArray();
+      res.json(user);
+    });
+
     //Upsert
     app.put("/users", async (req, res) => {
       const user = req.body;
