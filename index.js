@@ -192,29 +192,15 @@ async function run() {
       res.json(result);
     });
 
-    // //Make Admin
-    // app.put("/users/admin", async (req, res) => {
-    //   const user = req.body;
-    //   console.log("put", user);
-    //   const filter = { email: user.email };
-    //   const updateDoc = { $set: { role: "admin" } };
-    //   const result = await userCollection.updateOne(filter, updateDoc);
-    //   res.json(result);
-    // });
-
-    //Arif
-    app.put("/users", async (req, res) => {
+    //Make Admin
+    app.put("/users/admin", async (req, res) => {
       const user = req.body;
+      console.log("put", user);
       const filter = { email: user.email };
-      const options = { upsert: true };
-      const updateDoc = { $set: user };
-      const result = await usersCollection.updateOne(
-        filter,
-        updateDoc,
-        options
-      );
+      const updateDoc = { $set: { role: "admin" } };
+      const result = await userCollection.updateOne(filter, updateDoc);
       res.json(result);
-    });
+    });    
 
     //Admin Verfication
     app.get("/users/:email", async (req, res) => {
