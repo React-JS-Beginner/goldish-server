@@ -118,7 +118,7 @@ async function run() {
       const result = await orderCollection.deleteOne(query);
       console.log("Deleted", result);
       res.json(result);
-    });
+    }); 
 
     //Approve Order Change Status
     app.put("/updateStatus/:id", (req, res) => {
