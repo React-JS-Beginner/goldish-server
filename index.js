@@ -128,7 +128,7 @@ async function run() {
       console.log(updatedStatus);
       orderCollection
         .updateOne(filter, {
-          $set: { bookedproductStatus: updatedStatus },
+          $set: { status: updatedStatus },
         })
         .then((result) => {
           res.send(result);
